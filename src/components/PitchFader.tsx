@@ -1,12 +1,12 @@
 import { MutableRefObject, useState } from "react";
 
-const PitchFader = ({ sound }: { sound: MutableRefObject<Howl> }) => {
+const PitchFader = ({ sound }: { sound: Howl | null }) => {
   const [rate, setRate] = useState(1.0);
 
   // Function to handle the rate change (playback speed of the track)
   const handleRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let rate = parseFloat(e.target.value);
-    sound.current.rate(rate);
+    sound?.rate(rate);
     setRate(rate);
   };
   return (

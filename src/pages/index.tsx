@@ -5,28 +5,41 @@ import { useEffect, useState, useRef } from "react";
 import PlayPauseBtn from "@/components/playPauseBtn";
 import LineFader from "@/components/LineFader";
 import PitchFader from "@/components/PitchFader";
+import FileUpload from "@/components/FileUpload";
 
 // Howler.volume(0.5);
 
-// Play button plays the audio file - Pause button pauses audio file - When play button is then clicked again, replay will resume where it was paused
-function PlayPause() {
-  const sound = useRef(
-    new Howl({
-      src: ["/music/De Los Angeles (Ute Version).wav"],
+// function DjBooth() {
+//   const sound = useRef(
+//     new Howl({
+//       src: ["/music/De Los Angeles (Ute Version).wav"],
+//       html5: true,
+//       preload: true,
+//     })
+//   );
+
+const DjBooth: React.FC = () => {
+  const [soundRef, setSoundRef] = useState<Howl | null>(null);
+
+  const handleLoadTrack = (url: string) => {
+    console.log("Hello");
+    const newTrack = new Howl({
+      src: [url],
       html5: true,
       preload: true,
-    })
-  );
+    });
+    setSoundRef(newTrack);
+  };
 
   return (
     <div>
-      <PlayPauseBtn sound={sound} />
-
+      <PlayPauseBtn sound={soundRef} />
       <LineFader />
+      <PitchFader sound={soundRef} />
 
-      <PitchFader sound={sound} />
+      <FileUpload onLoadTrack={handleLoadTrack} />
     </div>
   );
-}
+};
 
-export default PlayPause;
+export default DjBooth;
