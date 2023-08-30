@@ -1,16 +1,14 @@
 import { MutableRefObject, useRef } from "react";
 
 // Play button plays the audio file - Pause button pauses audio file - When play button is then clicked again, replay will resume where it was paused
-const PlayPauseBtn = ({ sound }: { sound: Howl | null }) => {
+const PlayPauseBtnA = ({ sound }: { sound: Howl | null }) => {
   if (sound === null) {
     return null;
   } else {
-    console.log(sound);
     return (
       <div>
         <button
           onClick={() => {
-            console.log("HELLO");
             sound?.play();
           }}
         >
@@ -21,4 +19,4 @@ const PlayPauseBtn = ({ sound }: { sound: Howl | null }) => {
     );
   }
 };
-export default PlayPauseBtn;
+export default PlayPauseBtnA;

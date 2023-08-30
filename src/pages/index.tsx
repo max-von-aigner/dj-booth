@@ -1,43 +1,56 @@
 import { Howl, Howler } from "howler";
-import { stringify } from "querystring";
 import React from "react";
-import { useEffect, useState, useRef } from "react";
-import PlayPauseBtn from "@/components/playPauseBtn";
+import { useState } from "react";
+import PlayPauseBtn from "@/components/PlayPauseBtn";
 import LineFader from "@/components/LineFader";
 import PitchFader from "@/components/PitchFader";
 import FileUpload from "@/components/FileUpload";
 
-// Howler.volume(0.5);
-
-// function DjBooth() {
-//   const sound = useRef(
-//     new Howl({
-//       src: ["/music/De Los Angeles (Ute Version).wav"],
-//       html5: true,
-//       preload: true,
-//     })
-//   );
-
-const DjBooth: React.FC = () => {
-  const [soundRef, setSoundRef] = useState<Howl | null>(null);
-
-  const handleLoadTrack = (url: string) => {
-    console.log("Hello");
+const DjBooth = () => {
+  // initialize sound instance deck A
+  const [soundRefA, setSoundRefA] = useState<Howl | null>(null);
+  // Load handler for Deck A
+  const handleLoadTrackA = (url: string) => {
     const newTrack = new Howl({
       src: [url],
       html5: true,
       preload: true,
     });
-    setSoundRef(newTrack);
+    setSoundRefA(newTrack);
   };
 
-  return (
-    <div>
-      <PlayPauseBtn sound={soundRef} />
-      <LineFader />
-      <PitchFader sound={soundRef} />
+  // Initialize volume state deck A
+  const [volumeA, setVolumeA] = useState(1.0);
 
-      <FileUpload onLoadTrack={handleLoadTrack} />
+  // initialize sound instance deck B
+  const [soundRefB, setSoundRefB] = useState<Howl | null>(null);
+  // Load handler for deck B
+  const handleLoadTrackB = (url: string) => {
+    const newTrack = new Howl({
+      src: [url],
+      html5: true,
+      preload: true,
+    });
+    setSoundRefB(newTrack);
+  };
+
+  // Initialize volume state deck
+  const [volumeB, setVolumeB] = useState(1.0);
+
+  return (
+    <div className="flex flex-row">
+      <div className="Player A">
+        <PlayPauseBtn sound={soundRefA} />
+        <LineFader sound={soundRefA} volume={volumeA} setVolume={setVolumeA} />
+        <PitchFader sound={soundRefA} />
+        <FileUpload onLoadTrack={handleLoadTrackA} />
+      </div>
+      <div className="Player B">
+        <PlayPauseBtn sound={soundRefB} />
+        <LineFader sound={soundRefB} volume={volumeB} setVolume={setVolumeB} />
+        <PitchFader sound={soundRefB} />
+        <FileUpload onLoadTrack={handleLoadTrackB} />
+      </div>
     </div>
   );
 };

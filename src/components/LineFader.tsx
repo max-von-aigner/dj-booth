@@ -2,14 +2,21 @@ import { useState } from "react";
 
 // Initialize volume state
 
-const LineFader = () => {
-  const [volume, setVolume] = useState(Howler.volume());
+interface LineFaderProps {
+  sound: Howl | null;
+  volume: number;
+  setVolume: React.Dispatch<React.SetStateAction<number>>;
+}
 
+const LineFaderA: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
   // Function to handle volume change
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let volume = parseFloat(e.target.value);
-    Howler.volume(volume / 100); // slider returns a value from 0 - 100, we convert it to 0 - 1
-    setVolume(volume);
+    let newVolume = parseFloat(e.target.value) / 100;
+    if (sound) {
+      sound.volume(newVolume);
+    }
+
+    setVolume(newVolume);
   };
   return (
     <div>
@@ -18,11 +25,11 @@ const LineFader = () => {
         type="range"
         min="0"
         max="100"
-        value={volume}
+        value={volume * 100}
         onChange={handleVolumeChange}
       />
     </div>
   );
 };
 
-export default LineFader;
+export default LineFaderA;
