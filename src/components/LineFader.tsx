@@ -8,7 +8,7 @@ interface LineFaderProps {
   setVolume: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const LineFaderA: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
+const LineFader: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
   // Function to handle volume change
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newVolume = parseFloat(e.target.value) / 100;
@@ -32,4 +32,4 @@ const LineFaderA: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
   );
 };
 
-export default LineFaderA;
+export default LineFader;
