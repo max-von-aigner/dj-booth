@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Howl } from "howler";
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 interface PitchDragProps {
   sound: Howl | null;
@@ -37,18 +38,20 @@ const PitchDrag: React.FC<PitchDragProps> = ({ sound }) => {
   return (
     <div>
       <p>Pitch Drag</p>
-      <button
+      <Button
+        className="bg-theme-yellow rounded-xl m-1 border-2 drop-shadow-2xl border-white"
         onMouseDown={() => handlePitchDrag(false)}
         onMouseUp={handlePitchDragEnd}
       >
         -
-      </button>
-      <button
+      </Button>
+      <Button
+        className="bg-theme-yellow rounded-xl m-1 border-2 drop-shadow-2xl border-white"
         onMouseDown={() => handlePitchDrag(true)}
         onMouseUp={handlePitchDragEnd}
       >
         +
-      </button>
+      </Button>
     </div>
   );
 };
