@@ -14,7 +14,10 @@ const BpmAnalyzer: React.FC<BpmAnalyzerProps> = ({ url }) => {
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
           const audioContext = new AudioContext();
+
           audioContext.decodeAudioData(arrayBuffer).then((audioBuffer) => {
+            // audioBuffer
+
             // The result is passed to the analyzer
             realtimeBpmAnalyzer
               .analyzeFullBuffer(audioBuffer)

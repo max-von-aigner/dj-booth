@@ -3,17 +3,26 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 // Play button plays the audio file - Pause button pauses audio file - When play button is then clicked again, replay will resume where it was paused
-const PlayPauseBtnA = ({ sound }: { sound: Howl | null }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+const PlayPauseBtnA = ({
+  sound,
+  isPlaying,
+  setIsPlaying,
+}: {
+  sound: Howl | null;
+  isPlaying: boolean;
+  setIsPlaying: (newState: boolean) => void;
+}) => {
+  // const [isPlaying, setIsPlaying] = useState(false);
 
   const togglePlayPause = () => {
     if (sound === null) return null;
     if (isPlaying) {
       sound.pause();
+      setIsPlaying(false);
     } else {
       sound.play();
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   return (

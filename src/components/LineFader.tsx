@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Slider } from "@/components/ui/slider";
 
 // Initialize volume state
 
@@ -9,24 +10,33 @@ interface LineFaderProps {
 }
 
 const LineFader: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
+  console.log(volume);
   // Function to handle volume change
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newVolume = parseFloat(e.target.value) / 100;
+  const handleVolumeChange = (e: number[]) => {
+    // console.log({ volume });
+    let newVolume = e[0];
     if (sound) {
       sound.volume(newVolume);
     }
 
+    console.log({ newVolume });
     setVolume(newVolume);
   };
+
+  console.log(volume);
+  console.log(volume * 100);
+
   return (
     <div>
       <p>Line Fader</p>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={volume * 100}
-        onChange={handleVolumeChange}
+      <Slider
+        min={0}
+        max={1}
+        step={0.01}
+        value={[volume]}
+        onValueChange={handleVolumeChange}
+        className="h-60 w-4 flex-col"
+        orientation="vertical"
       />
     </div>
   );
