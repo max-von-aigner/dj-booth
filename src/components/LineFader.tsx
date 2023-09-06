@@ -10,24 +10,32 @@ interface LineFaderProps {
 }
 
 const LineFader: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
+  console.log(volume);
   // Function to handle volume change
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newVolume = parseFloat(e.target.value) / 100;
+  const handleVolumeChange = (e: number[]) => {
+    // console.log({ volume });
+    let newVolume = e[0];
     if (sound) {
       sound.volume(newVolume);
     }
 
+    console.log({ newVolume });
     setVolume(newVolume);
   };
+
+  console.log(volume);
+  console.log(volume * 100);
+
   return (
     <div>
       <p>Line Fader</p>
       <Slider
         min={0}
-        max={100}
-        value={[volume * 100]}
-        onChange={handleVolumeChange}
-        className="h-60 w-2 flex-col"
+        max={1}
+        step={0.01}
+        value={[volume]}
+        onValueChange={handleVolumeChange}
+        className="h-60 w-4 flex-col"
         orientation="vertical"
       />
     </div>

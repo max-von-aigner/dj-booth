@@ -1,54 +1,36 @@
-// import { Howl, Howler } from "howler";
-// import { createRealTimeBpmProcessor } from "realtime-bpm-analyzer";
-// import React, { useEffect } from "react";
+import { Howl, Howler } from "howler";
+import * as realtimeBpmAnalyzer from "realtime-bpm-analyzer";
+import React from "react";
+import { useState, useEffect } from "react";
 
-// interface BpmAnalyzerProps {
-//   sound: Howl | null;
-//   setBpm: (bpm: number) => void;
-// }
+interface BpmAnalyzerProps {
+  url: string | null;
+}
 
-// const BpmAnalyzer: React.FC<BpmAnalyzerProps> = ({ sound, setBpm }) => {
-//   useEffect(() => {
-//     if (sound) {
-//       const handleLoad = async () => {
-//         // Get the AudioContext from howler.js
-//         const audioContext = Howler.ctx;
+const BpmAnalyzer: React.FC<BpmAnalyzerProps> = ({ url }) => {
+  useEffect(() => {
+    if (url) {
+      fetch(url)
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+          const audioContext = new AudioContext();
 
-//         // Create the analyzer node
-//         const realtimeAnalyzerNode = await createRealTimeBpmProcessor(
-//           audioContext
-//         );
+          audioContext.decodeAudioData(arrayBuffer).then((audioBuffer) => {
+            // audioBuffer
 
-//         // Connect the sound source to the analyzer node
-//         const source = audioContext.createMediaElementSource(sound._src);
-//         source.connect(realtimeAnalyzerNode);
-//         realtimeAnalyzerNode.connect(audioContext.destination);
+            // The result is passed to the analyzer
+            realtimeBpmAnalyzer
+              .analyzeFullBuffer(audioBuffer)
+              .then((topCandidates) => {
+                // Do something with the BPM
+                console.log("Bpm topCandidates", topCandidates);
+              });
+          });
+        });
+    }
+  }, [url]); // Run this useEffect whenever 'url' prop changes
 
-//         // Enable the continuous feature
-//         realtimeAnalyzerNode.port.postMessage({
-//           message: "ASYNC_CONFIGURATION",
-//           parameters: {
-//             continuousAnalysis: true,
-//             stabilizationTime: 20_000,
-//           },
-//         });
+  return null;
+};
 
-//         realtimeAnalyzerNode.port.onmessage = (event) => {
-//           if (
-//             event.data.message === "BPM" ||
-//             event.data.message === "BPM_STABLE"
-//           ) {
-//             console.log("Detected BPM: ", event.data.result.bpm);
-//             setBpm(event.data.result.bpm);
-//           }
-//         };
-//       };
-
-//       sound.once("load", handleLoad);
-//     }
-//   }, [sound]);
-
-//   return null;
-// };
-
-// export default BpmAnalyzer;
+export default BpmAnalyzer;
