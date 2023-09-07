@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Howler } from "howler";
 import React from "react";
+import { Input } from "@/components/ui/input";
 
 // Define a type for the track
 type Track = {
@@ -27,16 +28,16 @@ const FileUpload: React.FC<{ onLoadTrack: (url: string) => void }> = ({
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleFileUpload} />
-      <ul>
-        {files.map((track, index) => (
-          <li key={index}>
-            {track.name}
-            <button onClick={() => onLoadTrack(track.url)}>Load</button>
-          </li>
-        ))}
-      </ul>
+    <div className="mb-4">
+      <Input type="file" onChange={handleFileUpload} />
+
+      {files.map((track, index) => (
+        // <li key={index}>
+        <div className="hidden">
+          {track.name}
+          <button onClick={() => onLoadTrack(track.url)}>Load</button>
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Howl } from "howler";
+import { Progress } from "@/components/ui/progress";
 
 interface TrackProgressBarProps {
   sound: Howl | null;
@@ -37,19 +38,12 @@ const TrackProgressBar: React.FC<TrackProgressBarProps> = ({ sound }) => {
   };
 
   return (
-    <div
+    <Progress
       ref={progressDiv}
       onClick={handleClick}
-      style={{
-        border: "1px solid #000",
-        height: "20px",
-        backgroundColor: "#ccc",
-      }}
-    >
-      <div
-        style={{ width: `${progress}%`, height: "100%", background: "blue" }}
-      ></div>
-    </div>
+      className=" h-4 bg-theme-yellow"
+      value={progress}
+    />
   );
 };
 

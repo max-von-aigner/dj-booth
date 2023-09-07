@@ -37,9 +37,8 @@ const PitchDrag: React.FC<PitchDragProps> = ({ sound }) => {
 
   return (
     <div>
-      <p>Pitch Drag</p>
       <Button
-        className="bg-theme-yellow rounded-xl m-1 border-2 drop-shadow-2xl border-white"
+        className="bg-theme-yellow rounded-xl m-1 mb-4 border-2 drop-shadow-2xl border-white"
         onMouseDown={() => handlePitchDrag(false)}
         onMouseUp={handlePitchDragEnd}
       >

@@ -28,7 +28,6 @@ const LineFader: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
 
   return (
     <div>
-      <p>Line Fader</p>
       <Slider
         min={0}
         max={1}

@@ -22,8 +22,8 @@ const SpinnerImage = ({ spin }: { spin: boolean }) => {
   }, [spin, controls]);
   return (
     <>
-      <motion.div animate={controls} className="grid place-items-center ">
-        <div className="grid place-content-center h-full">
+      <motion.div animate={controls} className="grid place-items-center ml-20">
+        <div className="grid place-content-center h-full ml-4">
           <p className="text-[120px]">🍌</p>
         </div>
       </motion.div>
