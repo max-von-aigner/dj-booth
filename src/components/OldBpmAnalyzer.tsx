@@ -1,15 +1,13 @@
 import { Howl, Howler } from "howler";
 import * as realtimeBpmAnalyzer from "realtime-bpm-analyzer";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 
 interface BpmAnalyzerProps {
   url: string | null;
-  setBpm: (bpm: number | null) => void;
 }
 
-const BpmAnalyzer: React.FC<BpmAnalyzerProps> = ({ url, setBpm }) => {
-  // Now you have access to the setBpm function.
-
+const BpmAnalyzer: React.FC<BpmAnalyzerProps> = ({ url }) => {
   useEffect(() => {
     if (url) {
       fetch(url)
@@ -18,19 +16,21 @@ const BpmAnalyzer: React.FC<BpmAnalyzerProps> = ({ url, setBpm }) => {
           const audioContext = new AudioContext();
 
           audioContext.decodeAudioData(arrayBuffer).then((audioBuffer) => {
+            // audioBuffer
+
+            // The result is passed to the analyzer
             realtimeBpmAnalyzer
               .analyzeFullBuffer(audioBuffer)
               .then((topCandidates) => {
-                if (topCandidates.length > 0) {
-                  setBpm(parseFloat(topCandidates[0].tempo.toFixed(2)));
-                }
+                // Do something with the BPM
+                console.log("Bpm topCandidates", topCandidates);
               });
           });
         });
     }
-  }, [url]);
+  }, [url]); // Run this useEffect whenever 'url' prop changes
 
-  return null; // Return null because the displaying of BPM is handled in the parent component
+  return null;
 };
 
 export default BpmAnalyzer;

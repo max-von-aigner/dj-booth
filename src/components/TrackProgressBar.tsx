@@ -41,7 +41,7 @@ const TrackProgressBar: React.FC<TrackProgressBarProps> = ({ sound }) => {
     <Progress
       ref={progressDiv}
       onClick={handleClick}
-      className=" h-4 bg-theme-yellow"
+      className=" h-4 bg-orange-100"
       value={progress}
     />
   );

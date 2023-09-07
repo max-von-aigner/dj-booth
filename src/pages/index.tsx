@@ -5,16 +5,11 @@ import PlayPauseBtn from "@/components/PlayPauseBtn";
 import LineFader from "@/components/LineFader";
 import PitchFader from "@/components/PitchFader";
 import FileUpload from "@/components/FileUpload";
-import NewLineFader from "@/components/NewLineFaderWithHeadphones";
 import Head from "next/head";
 import TrackProgressBar from "@/components/TrackProgressBar";
 import PitchDrag from "@/components/PitchDrag";
-import { motion } from "framer-motion";
 import SpinnerImage from "@/components/SpinnerImage";
-import BpmAnalyzerContinious from "@/components/BpmAnalyzerContinious";
-// import BpmAnalyzer from "@/components/BpmAnalyzer";
-import BpmAnalyzerChatGPT from "@/components/ChatGptBpmAnalyzer";
-import { Separator } from "@/components/ui/separator";
+import BpmAnalyzer from "@/components/BpmAnalyzer";
 
 // import BpmAnalyzer from "@/components/BpmAnalyzer";
 
@@ -55,86 +50,91 @@ const DjBooth = () => {
   const [volumeA, setVolumeA] = useState(1.0);
   const [volumeB, setVolumeB] = useState(1.0);
 
-  // Initialize BPM state
-  const [bpmA, setBpmA] = useState(0);
-  const [bpmB, setBpmB] = useState(0);
+  // Set the original bpm on load, and calculated bpm after pitch is changed
+  const [originalBpmA, setOriginalBpmA] = useState<number | null>(null);
+  const [originalBpmB, setOriginalBpmB] = useState<number | null>(null);
+
+  const [calculatedBpmA, setCalculatedBpmA] = useState<number | null>(null);
+  const [calculatedBpmB, setCalculatedBpmB] = useState<number | null>(null);
 
   return (
     <>
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <div className="bg-green-400 w-screen h-screen -mt-12">
-        <div className="flex flex-row m-12  relative">
-          <div
-            className=" flex flex-col mt-12 w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-2xl"
-            id="playerA"
-          >
-            <div className="flex flex-col justify-self-center">
-              <span className="font-sans font-bold text-center -mt-4 mb-10">
-                Player A
-              </span>
-            </div>
-            <div className="flex flex-row">
-              <PitchFader sound={soundA} />
-              <SpinnerImage spin={isPlayingA} />
-            </div>
-            <PitchDrag sound={soundA} />
-            <FileUpload onLoadTrack={handleLoadTrackA} />
-            <BpmAnalyzerContinious src="/Users/max/Coding/dj-booth/public/music/Byron Yeates, Roza Terenzi & D. Tiffany - Roza Terenzi - Gush (Byron Yeates Remix).mp3" />
-            <PlayPauseBtn
-              isPlaying={isPlayingA}
-              setIsPlaying={setIsPlayingA}
-              sound={soundA}
-            />
-
-            <TrackProgressBar sound={soundA} />
-            <BpmAnalyzerChatGPT url={urlSoundA} />
-            <div>BPM: {bpmA}</div>
-          </div>
-          <div
-            className=" flex flex-col bg-indigo-400 w-[30vw] h-[50vh] ml-7 mt-56 rounded-3xl p-10 drop-shadow-2xl"
-            id="mixer"
-          >
-            <span className="font-sans font-bold text-center -mt-4 mb-10 ">
-              Mixer
-            </span>
-            <div className="flex flex-row justify-items-end align-middle ">
-              <LineFader
-                sound={soundA}
-                volume={volumeA}
-                setVolume={setVolumeA}
-              />
-              <LineFader
-                sound={soundB}
-                volume={volumeB}
-                setVolume={setVolumeB}
-              />
-            </div>
-          </div>
-          <div
-            className="Player_B flex flex-col mt-12 w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 absolute right-0 drop-shadow-2xl"
-            id="playerB"
-          >
+      <div className="h-screen flex flex-row relative mx-8 pt-12">
+        <div
+          className=" flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-2xl"
+          id="playerA"
+        >
+          <div className="flex flex-col justify-self-center">
             <span className="font-sans font-bold text-center -mt-4 mb-10">
-              Player B
+              Player A
             </span>
-            {/* <BpmAnalyzer url={urlSoundB} /> */}
-            <div className="flex flex-row">
-              <PitchFader sound={soundB} />
-              <SpinnerImage spin={isPlayingB} />
-            </div>
-            <PitchDrag sound={soundB} />
-            <FileUpload onLoadTrack={handleLoadTrackB} />
-            <PlayPauseBtn
-              isPlaying={isPlayingB}
-              setIsPlaying={setIsPlayingB}
-              sound={soundB}
-            />
-            <TrackProgressBar sound={soundB} />
-            {/* <BpmAnalyzer sound={soundRefB} setBpm={setBpmB} /> */}
-            <div>BPM: {bpmB}</div>
           </div>
+          <div className="flex flex-row">
+            <PitchFader
+              sound={soundA}
+              setCalculatedBpm={setCalculatedBpmA}
+              originalBpm={originalBpmA}
+            />
+            <SpinnerImage spin={isPlayingA} />
+          </div>
+          <PitchDrag sound={soundA} />
+          <FileUpload onLoadTrack={handleLoadTrackA} />
+          <PlayPauseBtn
+            isPlaying={isPlayingA}
+            setIsPlaying={setIsPlayingA}
+            sound={soundA}
+          />
+          <TrackProgressBar sound={soundA} />
+          <BpmAnalyzer url={urlSoundA} setBpm={setOriginalBpmA} />
+          {originalBpmA ? <div>Original BPM: {originalBpmA}</div> : null}
+          {calculatedBpmA ? (
+            <div>Calculated BPM: {calculatedBpmA.toFixed(2)}</div>
+          ) : null}
+        </div>
+
+        <div
+          className=" flex flex-col bg-indigo-400 w-[30vw] h-[50vh] ml-7 mt-56 rounded-3xl p-10 drop-shadow-2xl"
+          id="mixer"
+        >
+          <span className="font-sans font-bold text-center -mt-4 mb-10 ">
+            Mixer
+          </span>
+          <div className="flex flex-row justify-items-end align-middle ">
+            <LineFader sound={soundA} volume={volumeA} setVolume={setVolumeA} />
+            <LineFader sound={soundB} volume={volumeB} setVolume={setVolumeB} />
+          </div>
+        </div>
+        <div
+          className="Player_B flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 absolute right-0 drop-shadow-2xl"
+          id="playerB"
+        >
+          <span className="font-sans font-bold text-center -mt-4 mb-10">
+            Player B
+          </span>
+          <div className="flex flex-row">
+            <PitchFader
+              sound={soundB}
+              setCalculatedBpm={setCalculatedBpmB}
+              originalBpm={originalBpmB}
+            />
+            <SpinnerImage spin={isPlayingB} />
+          </div>
+          <PitchDrag sound={soundB} />
+          <FileUpload onLoadTrack={handleLoadTrackB} />
+          <PlayPauseBtn
+            isPlaying={isPlayingB}
+            setIsPlaying={setIsPlayingB}
+            sound={soundB}
+          />
+          <TrackProgressBar sound={soundB} />
+          <BpmAnalyzer url={urlSoundB} setBpm={setOriginalBpmB} />
+          {originalBpmB ? <div>Original BPM: {originalBpmB}</div> : null}
+          {calculatedBpmB ? (
+            <div>Calculated BPM: {calculatedBpmB.toFixed(2)}</div>
+          ) : null}
         </div>
       </div>
     </>

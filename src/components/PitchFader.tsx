@@ -2,42 +2,42 @@ import { cn } from "@/lib/utils";
 import { MutableRefObject, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 
-// Function to handle the rate change (playback speed of the track)
-// const handleRateChange = (value: number) => {
-//   let rate = parseFloat(value.toString());
-//   sound?.rate(rate);
-//   setRate(rate);
-// };
+type PitchFaderProps = {
+  sound: Howl | null;
+  setCalculatedBpm: (bpm: number | null) => void;
+  originalBpm: number | null;
+};
 
-const PitchFader = ({ sound }: { sound: Howl | null }) => {
+const PitchFader: React.FC<PitchFaderProps> = ({
+  sound,
+  setCalculatedBpm,
+  originalBpm,
+}) => {
   const [rate, setRate] = useState(1.0);
 
   // Function to handle the rate change (playback speed of the track)
   const handleRateChange = (val: number[]) => {
-    let rate = val;
-    sound?.rate(val[0]);
-    setRate(val[0]);
+    let rate = val[0];
+    sound?.rate(rate);
+    setRate(rate);
+
+    // Update the BPM according to the rate change if we have an original BPM.
+    if (originalBpm !== null) {
+      let newBpm = originalBpm * rate;
+      setCalculatedBpm(newBpm);
+    }
   };
   return (
     <div>
-      <p>Pitch</p>
       <Slider
         min={0.84}
         max={1.16}
-        step={0.005}
+        step={0.0005}
         value={[rate]}
         onValueChange={handleRateChange}
         className="h-60 w-2 flex-col"
         orientation="vertical"
       />
-      {/* <input
-        type="range"
-        min="0.84"
-        max="1.16"
-        step="0.005"
-        value={rate}
-        onChange={handleRateChange}
-      /> */}
     </div>
   );
 };
