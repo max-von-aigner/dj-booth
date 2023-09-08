@@ -28,7 +28,10 @@ const PitchFader: React.FC<PitchFaderProps> = ({
     }
   };
   return (
-    <div>
+    <div
+      style={{ userSelect: "none" }}
+      onDoubleClick={() => handleRateChange([(0.84 + 1.16) / 2])}
+    >
       <Slider
         min={0.84}
         max={1.16}

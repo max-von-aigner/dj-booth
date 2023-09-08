@@ -29,7 +29,11 @@ const FileUpload: React.FC<{ onLoadTrack: (url: string) => void }> = ({
 
   return (
     <div className="mb-4">
-      <Input type="file" onChange={handleFileUpload} />
+      <Input
+        type="file"
+        onChange={handleFileUpload}
+        className=" bg-slate-300 bg-opacity-70"
+      />
 
       {files.map((track, index) => (
         // <li key={index}>
