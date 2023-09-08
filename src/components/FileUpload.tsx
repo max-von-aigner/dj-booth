@@ -36,8 +36,7 @@ const FileUpload: React.FC<{ onLoadTrack: (url: string) => void }> = ({
       />
 
       {files.map((track, index) => (
-        // <li key={index}>
-        <div className="hidden">
+        <div key={track.name} className="hidden">
           {track.name}
           <button onClick={() => onLoadTrack(track.url)}>Load</button>
         </div>
