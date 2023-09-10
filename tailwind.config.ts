@@ -22,6 +22,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      dropShadow: {
+        neo: "0.5rem 0.5rem 0 rgba(0, 0, 0, 1)",
+      },
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },

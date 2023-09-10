@@ -11,6 +11,7 @@ import PitchBend from "@/components/PitchBend";
 import SpinnerImage from "@/components/SpinnerImage";
 import BpmAnalyzer from "@/components/BpmAnalyzer";
 import { Badge } from "@/components/ui/badge";
+import { DragButton } from "@/components/DragButton";
 
 // import BpmAnalyzer from "@/components/BpmAnalyzer";
 
@@ -65,7 +66,7 @@ const DjBooth = () => {
       </Head>
       <div className="h-screen flex flex-row relative justify-between mx-8 pt-12">
         <div
-          className=" flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-2xl"
+          className=" flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
           id="playerA"
         >
           <div className="flex flex-col justify-self-center">
@@ -73,6 +74,7 @@ const DjBooth = () => {
               Player A
             </span>
           </div>
+          <DragButton />
           <div className="flex flex-row items-center mb-10">
             <PitchFader
               sound={soundA}
@@ -102,10 +104,10 @@ const DjBooth = () => {
         </div>
 
         <div
-          className=" flex flex-col bg-indigo-400 w-[30vw] h-[50vh] mt-56 rounded-3xl p-10 drop-shadow-2xl"
+          className=" flex flex-col bg-indigo-400 w-[30vw] h-[50vh] mt-56 rounded-3xl p-10 drop-shadow-neo border-4 border-black"
           id="mixer"
         >
-          <span className="font-sans font-bold text-center -mt-4 mb-10  ">
+          <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70 ">
             Mixer
           </span>
           <div className="flex justify-between px-10">
@@ -114,7 +116,7 @@ const DjBooth = () => {
           </div>
         </div>
         <div
-          className="Player_B flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-2xl"
+          className="Player_B flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
           id="playerB"
         >
           <span className="font-sans font-bold text-center -mt-4 mb-10">

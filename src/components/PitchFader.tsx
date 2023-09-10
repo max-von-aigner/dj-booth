@@ -38,7 +38,7 @@ const PitchFader: React.FC<PitchFaderProps> = ({
         step={0.0005}
         value={[rate]}
         onValueChange={handleRateChange}
-        className="h-60 w-2 flex-col"
+        className="h-60 w-2 flex-col shadow-inner"
         orientation="vertical"
       />
     </div>

@@ -35,7 +35,7 @@ const LineFader: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
         step={0.01}
         value={[volume]}
         onValueChange={handleVolumeChange}
-        className="h-60 w-4 flex-col"
+        className="h-60 w-4 flex-col drop-shadow-md"
         orientation="vertical"
       />
     </div>
