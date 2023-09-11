@@ -12,6 +12,7 @@ import SpinnerImage from "@/components/SpinnerImage";
 import BpmAnalyzer from "@/components/BpmAnalyzer";
 import { Badge } from "@/components/ui/badge";
 import { DragButton } from "@/components/DragButton";
+import Ticker from "@/components/Ticker";
 
 // import BpmAnalyzer from "@/components/BpmAnalyzer";
 
@@ -66,7 +67,7 @@ const DjBooth = () => {
       </Head>
       <div className="h-screen flex flex-row relative justify-between mx-8 pt-12">
         <div
-          className=" flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
+          className=" flex flex-col  w-[30vw] h-[80vh] my-12 bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
           id="playerA"
         >
           <div className="flex flex-col justify-self-center">
@@ -95,6 +96,8 @@ const DjBooth = () => {
             )}
           </div>
           <FileUpload onLoadTrack={handleLoadTrackA} />
+          <Ticker items={["Track.name"]}></Ticker>
+
           <PlayPauseBtn
             isPlaying={isPlayingA}
             setIsPlaying={setIsPlayingA}
@@ -104,7 +107,7 @@ const DjBooth = () => {
         </div>
 
         <div
-          className=" flex flex-col bg-indigo-400 w-[30vw] h-[50vh] mt-56 rounded-3xl p-10 drop-shadow-neo border-4 border-black"
+          className=" flex flex-col mt-64 bg-indigo-400 w-[30vw] h-[50vh]  rounded-3xl p-10 drop-shadow-neo border-4 border-black"
           id="mixer"
         >
           <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70 ">
@@ -116,7 +119,7 @@ const DjBooth = () => {
           </div>
         </div>
         <div
-          className="Player_B flex flex-col  w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
+          className="Player_B flex flex-col my-12 w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
           id="playerB"
         >
           <span className="font-sans font-bold text-center -mt-4 mb-10">
