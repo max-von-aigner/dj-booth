@@ -14,7 +14,7 @@ const Ticker: React.FC<TickerProps> = ({ track }) => {
           className="relative"
           style={{ display: "inline-block", whiteSpace: "nowrap" }}
           animate={{
-            left: ["-50%", "100%"],
+            right: ["-50%", "100%"],
           }}
           transition={{
             duration: 10,
@@ -34,7 +34,7 @@ const Ticker: React.FC<TickerProps> = ({ track }) => {
         className="relative"
         style={{ display: "inline-block", whiteSpace: "nowrap" }}
         animate={{
-          left: ["-100%", "100%"],
+          right: ["100%", "-200%"],
         }}
         transition={{
           duration: 10,

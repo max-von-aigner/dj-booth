@@ -1,0 +1,8 @@
+/* src/fonts/fonts.css */
+@font-face {
+  font-family: "Inter Black";
+  src: url("./Inter-Black.woff") format("woff");
+  font-weight: 900; /* Adjust as per your requirement */
+  font-style: normal; /* Adjust as per your requirement */
+  font-display: swap;
+}

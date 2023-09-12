@@ -14,6 +14,8 @@ import { Badge } from "@/components/ui/badge";
 import { DragButton } from "@/components/DragButton";
 import Ticker from "@/components/Ticker";
 import { Track } from "@/components/FileUpload";
+// import "/Users/max/Coding/dj-booth/src/fonts/fonts.css";
+import Logo from "@/components/Logo";
 
 // import BpmAnalyzer from "@/components/BpmAnalyzer";
 
@@ -126,17 +128,27 @@ const DjBooth = () => {
             />
           </div>
         </div>
-
-        <div
-          className=" flex flex-col mt-64 bg-indigo-400 w-[30vw] h-[50vh]  rounded-3xl p-10 drop-shadow-neo border-4 border-black"
-          id="mixer"
-        >
-          <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70 ">
-            Mixer
-          </span>
-          <div className="flex justify-between px-10">
-            <LineFader sound={soundA} volume={volumeA} setVolume={setVolumeA} />
-            <LineFader sound={soundB} volume={volumeB} setVolume={setVolumeB} />
+        <div className=" flex flex-col ">
+          <Logo />
+          <div
+            className=" flex flex-col mt-64 bg-indigo-400 w-[30vw] h-[50vh]  rounded-3xl p-10 drop-shadow-neo border-4 border-black"
+            id="mixer"
+          >
+            <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70 ">
+              Mixer
+            </span>
+            <div className="flex justify-between px-10">
+              <LineFader
+                sound={soundA}
+                volume={volumeA}
+                setVolume={setVolumeA}
+              />
+              <LineFader
+                sound={soundB}
+                volume={volumeB}
+                setVolume={setVolumeB}
+              />
+            </div>
           </div>
         </div>
         <div
