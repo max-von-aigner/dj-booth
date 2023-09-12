@@ -20,14 +20,16 @@ const SpinnerImage = ({ spin }: { spin: boolean }) => {
       controls.stop();
     }
   }, [spin, controls]);
+  //grid place-items-center
+  //grid place-content-center
   return (
-    <>
-      <motion.div animate={controls} className="grid place-items-center ml-10">
-        <div className="grid place-content-center h-full ml-4">
-          <p className="text-[120px]">🍌</p>
-        </div>
-      </motion.div>
-    </>
+    <motion.div
+      animate={controls}
+      id="spinnerImage"
+      className="absolute inset-0 justify-center items-center flex pointer-events-none"
+    >
+      <p className="text-[120px]">🍌</p>
+    </motion.div>
   );
 };
 

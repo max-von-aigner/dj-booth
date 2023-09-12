@@ -13,6 +13,7 @@ import BpmAnalyzer from "@/components/BpmAnalyzer";
 import { Badge } from "@/components/ui/badge";
 import { DragButton } from "@/components/DragButton";
 import Ticker from "@/components/Ticker";
+import { Track } from "@/components/FileUpload";
 
 // import BpmAnalyzer from "@/components/BpmAnalyzer";
 
@@ -24,9 +25,15 @@ const DjBooth = () => {
   const [urlSoundA, setUrlSoundA] = useState<string | null>(null);
   const [urlSoundB, setUrlSoundB] = useState<string | null>(null);
 
+  const [newTrackForTickerB, setNewTrackForTickerB] = useState<Track | null>(
+    null
+  );
+
   // initialize state for
   const [isPlayingA, setIsPlayingA] = useState(false);
   const [isPlayingB, setIsPlayingB] = useState(false);
+
+  type HowlerTrack = Track & { howler: Howl };
 
   // Load handlers
   const handleLoadTrackA = (url: string) => {
@@ -39,14 +46,15 @@ const DjBooth = () => {
     setSoundA(newTrack);
   };
 
-  const handleLoadTrackB = (url: string) => {
-    setUrlSoundB(url);
+  const handleLoadTrackB = (track: Track) => {
     const newTrack = new Howl({
-      src: [url],
+      src: [track.url],
       html5: true,
       preload: true,
     });
+    setUrlSoundB(track.url);
     setSoundB(newTrack);
+    setNewTrackForTickerB(track);
   };
 
   // Initialize volume state
@@ -59,6 +67,9 @@ const DjBooth = () => {
 
   const [calculatedBpmA, setCalculatedBpmA] = useState<number | null>(null);
   const [calculatedBpmB, setCalculatedBpmB] = useState<number | null>(null);
+
+  const [currentTrackA, setCurrentTrackA] = useState<Track | null>(null);
+  const [currentTrackB, setCurrentTrackB] = useState<Track | null>(null);
 
   return (
     <>
@@ -75,15 +86,21 @@ const DjBooth = () => {
               Player A
             </span>
           </div>
-          <DragButton />
-          <div className="flex flex-row items-center mb-10">
-            <PitchFader
-              sound={soundA}
-              setCalculatedBpm={setCalculatedBpmA}
-              originalBpm={originalBpmA}
-            />
-            <PitchBend sound={soundA} />
-            <SpinnerImage spin={isPlayingA} />
+
+          <div className="flex flex-row" id="midSection">
+            <div
+              className="flex flex-row items-center mb-10 relative w-full"
+              id="pitchSection"
+            >
+              <PitchFader
+                sound={soundA}
+                setCalculatedBpm={setCalculatedBpmA}
+                originalBpm={originalBpmA}
+              />
+              <PitchBend sound={soundA} />
+              <DragButton />
+              <SpinnerImage spin={isPlayingA} />
+            </div>
           </div>
           <BpmAnalyzer url={urlSoundA} setBpm={setOriginalBpmA} />
           <div className="flex flex-row justify-center mb-2">
@@ -95,15 +112,19 @@ const DjBooth = () => {
               <Badge>BPM: 0</Badge>
             )}
           </div>
-          <FileUpload onLoadTrack={handleLoadTrackA} />
-          <Ticker items={["Track.name"]}></Ticker>
 
-          <PlayPauseBtn
-            isPlaying={isPlayingA}
-            setIsPlaying={setIsPlayingA}
-            sound={soundA}
-          />
+          {/* <FileUpload onLoadTrack={handleLoadTrackA} >
+            <Ticker></Ticker> */}
+          {/* </FileUpload> */}
+
           <TrackProgressBar sound={soundA} />
+          <div className="flex justify-center">
+            <PlayPauseBtn
+              isPlaying={isPlayingA}
+              setIsPlaying={setIsPlayingA}
+              sound={soundA}
+            />
+          </div>
         </div>
 
         <div
@@ -125,7 +146,7 @@ const DjBooth = () => {
           <span className="font-sans font-bold text-center -mt-4 mb-10">
             Player B
           </span>
-          <div className="flex flex-row items-center mb-10">
+          <div className="flex flex-row items-center mb-10 relative">
             <PitchFader
               sound={soundB}
               setCalculatedBpm={setCalculatedBpmB}
@@ -145,12 +166,15 @@ const DjBooth = () => {
             )}
           </div>
           <FileUpload onLoadTrack={handleLoadTrackB} />
-          <PlayPauseBtn
-            isPlaying={isPlayingB}
-            setIsPlaying={setIsPlayingB}
-            sound={soundB}
-          />
+          <Ticker track={newTrackForTickerB}></Ticker>
           <TrackProgressBar sound={soundB} />
+          <div className="flex justify-center">
+            <PlayPauseBtn
+              isPlaying={isPlayingB}
+              setIsPlaying={setIsPlayingB}
+              sound={soundB}
+            />
+          </div>
         </div>
       </div>
     </>

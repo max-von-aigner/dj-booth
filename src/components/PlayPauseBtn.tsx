@@ -13,8 +13,6 @@ const PlayPauseBtnA = ({
   isPlaying: boolean;
   setIsPlaying: (newState: boolean) => void;
 }) => {
-  // const [isPlaying, setIsPlaying] = useState(false);
-
   const togglePlayPause = () => {
     if (sound === null) return null;
     if (isPlaying) {
@@ -29,7 +27,7 @@ const PlayPauseBtnA = ({
   return (
     <div>
       <Toggle
-        className="bg-theme-yellow rounded-full absolute h-20 w-20 right-0 bottom-0 m-4 border-2 drop-shadow-2xl border-white"
+        className="bg-theme-yellow rounded-full h-10 w-20  m-4 border-2 drop-shadow-md border-white"
         onClick={togglePlayPause}
       >
         {isPlaying ? "Pause" : "Play"}
