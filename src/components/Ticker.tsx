@@ -34,7 +34,7 @@ const Ticker: React.FC<TickerProps> = ({ track }) => {
         className="relative"
         style={{ display: "inline-block", whiteSpace: "nowrap" }}
         animate={{
-          right: ["100%", "-200%"],
+          right: ["-100%", "100%"],
         }}
         transition={{
           duration: 10,
@@ -43,7 +43,13 @@ const Ticker: React.FC<TickerProps> = ({ track }) => {
           ease: "linear",
         }}
       >
-        <span style={{ marginRight: "20px" }}>{track.name}</span>
+        <div className="flex flex-row">
+          <ul className="flex justify-evenly">
+            <li style={{ marginRight: "20px" }}>{track.name}</li>
+            <li>{"  🎵  "}</li>
+            <li style={{ marginRight: "20px" }}>{track.name}</li>
+          </ul>
+        </div>
       </motion.div>
     </div>
   );
