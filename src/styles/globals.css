@@ -86,6 +86,6 @@
   bottom: 0;
   left: 50%; /* center the playhead */
   width: 2px;
-  background-color: red;
+  background-color: honeydew;
   z-index: 10;
 }

@@ -13,7 +13,7 @@ const PitchBend: React.FC<PitchBendProps> = ({ sound }) => {
   // Function to handle pitch drag
   const handlePitchDrag = (increase: boolean) => {
     if (sound) {
-      sound.rate(increase ? 1.03 : 0.97);
+      sound.rate(increase ? 1.05 : 0.95);
       setDragging(true);
     }
   };

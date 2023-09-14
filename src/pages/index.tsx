@@ -90,7 +90,7 @@ const DjBooth = () => {
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <div className="h-screen flex flex-row relative justify-between mx-8 pt-12">
+      <div className="h-screen flex flex-row relative justify-between mx-8 mt-16 pt-12">
         <div
           className=" flex flex-col  w-[30vw] h-[80vh] my-12 bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
           id="playerA"
@@ -112,7 +112,7 @@ const DjBooth = () => {
                 originalBpm={originalBpmA}
               />
               <PitchBend sound={soundA} />
-              <DragButton />
+
               <SpinnerImage spin={isPlayingA} />
             </div>
           </div>
@@ -140,7 +140,10 @@ const DjBooth = () => {
         </div>
         <div className=" flex flex-col ">
           <Logo />
-          <Waveform url={urlSoundA} howlInstance={soundA} />
+          <div className="flex flex-col mt-2 border-black rounded-2xl border-4 bg-theme-blue drop-shadow-neo py-2 h-[30vh]">
+            <Waveform url={urlSoundA} howlInstance={soundA} />
+            <Waveform url={urlSoundB} howlInstance={soundB} />
+          </div>
           <Mixer
             soundA={soundA}
             soundB={soundB}
