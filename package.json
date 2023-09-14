@@ -33,9 +33,11 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "wavesurfer.js": "^7.3.1"
   },
   "devDependencies": {
-    "@types/howler": "^2.2.8"
+    "@types/howler": "^2.2.8",
+    "@types/wavesurfer.js": "^6.0.6"
   }
 }

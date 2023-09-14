@@ -27,7 +27,7 @@ const PlayPauseBtnA = ({
   return (
     <div>
       <Toggle
-        className="bg-theme-yellow rounded-full h-10 w-20  m-4 mt-14 border-2 drop-shadow-md border-white"
+        className="bg-theme-yellow rounded-full h-10 w-20  m-4 mt-14 border-2  border-white"
         onClick={togglePlayPause}
       >
         {isPlaying ? "Pause" : "Play"}

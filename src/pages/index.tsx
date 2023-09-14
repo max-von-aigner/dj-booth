@@ -1,6 +1,6 @@
 import { Howl, Howler } from "howler";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PlayPauseBtn from "@/components/PlayPauseBtn";
 import LineFader from "@/components/LineFader";
 import PitchFader from "@/components/PitchFader";
@@ -17,11 +17,10 @@ import { Track } from "@/components/FileUpload";
 // import "/Users/max/Coding/dj-booth/src/fonts/fonts.css";
 import Logo from "@/components/Logo";
 import Mixer from "@/components/Mixer";
-
-// import BpmAnalyzer from "@/components/BpmAnalyzer";
+import Waveform from "@/components/Waveform";
 
 const DjBooth = () => {
-  // initialize sound instance
+  // Initialize sound instance
   const [soundA, setSoundA] = useState<Howl | null>(null);
   const [soundB, setSoundB] = useState<Howl | null>(null);
 
@@ -35,11 +34,15 @@ const DjBooth = () => {
     null
   );
 
-  // initialize state for
+  // Initialize state for PlauPauseButton
   const [isPlayingA, setIsPlayingA] = useState(false);
   const [isPlayingB, setIsPlayingB] = useState(false);
 
   type HowlerTrack = Track & { howler: Howl };
+
+  useEffect(() => {
+    console.log("DjBooth rendered");
+  }, []);
 
   // Load handlers
   const handleLoadTrackA = (track: Track) => {
@@ -48,9 +51,9 @@ const DjBooth = () => {
       html5: true,
       preload: true,
     });
-    setUrlSoundA(track.url);
     setSoundA(newTrack);
     setNewTrackForTickerA(track);
+    setUrlSoundA(track.url);
   };
 
   const handleLoadTrackB = (track: Track) => {
@@ -74,6 +77,13 @@ const DjBooth = () => {
 
   const [calculatedBpmA, setCalculatedBpmA] = useState<number | null>(null);
   const [calculatedBpmB, setCalculatedBpmB] = useState<number | null>(null);
+
+  // Get the duration and current time from your Howler player for Waveform
+  function getCurrentTimeFraction(howl: Howl) {
+    const duration = howl.duration();
+    const currentTime = howl.seek();
+    return currentTime / duration;
+  }
 
   return (
     <>
@@ -130,6 +140,7 @@ const DjBooth = () => {
         </div>
         <div className=" flex flex-col ">
           <Logo />
+          <Waveform url={urlSoundA} howlInstance={soundA} />
           <Mixer
             soundA={soundA}
             soundB={soundB}

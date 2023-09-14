@@ -79,3 +79,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+.playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%; /* center the playhead */
+  width: 2px;
+  background-color: red;
+  z-index: 10;
+}

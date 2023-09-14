@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React from "react";
 import { Input } from "@/components/ui/input";
 
 // Define a type for the track
@@ -38,15 +37,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onLoadTrack }) => {
         onChange={handleFileUpload}
         className=" bg-slate-300 bg-opacity-70"
       />
-
-      {files.map((track, index) => (
-        <>
-          <div key={track.name} className="hidden">
-            {track.name}
-            <button onClick={() => onLoadTrack(track)}>Load</button>
-          </div>
-        </>
-      ))}
     </div>
   );
 };
