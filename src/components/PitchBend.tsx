@@ -38,14 +38,14 @@ const PitchBend: React.FC<PitchBendProps> = ({ sound }) => {
   return (
     <div className="flex flex-col ml-5 ">
       <Button
-        className="bg-theme-yellow w-3 h-3 rounded-xl m-1 border-2 drop-shadow-2xl border-white  text-black"
+        className="bg-theme-yellow w-3 h-3 rounded-m m-1 border-2 drop-shadow-2xl border-white  text-black"
         onMouseDown={() => handlePitchDrag(true)}
         onMouseUp={handlePitchDragEnd}
       >
         +
       </Button>
       <Button
-        className="bg-theme-yellow w-3 h-3 rounded-xl m-1 mb-4 border-2 drop-shadow-2xl border-white text-black"
+        className="bg-theme-yellow w-3 h-3 rounded-m m-1 mb-4 border-2 drop-shadow-2xl border-white text-black"
         onMouseDown={() => handlePitchDrag(false)}
         onMouseUp={handlePitchDragEnd}
       >

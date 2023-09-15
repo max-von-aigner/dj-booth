@@ -18,6 +18,7 @@ import { Track } from "@/components/FileUpload";
 import Logo from "@/components/Logo";
 import Mixer from "@/components/Mixer";
 import Waveform from "@/components/Waveform";
+import { motion } from "framer-motion";
 
 const DjBooth = () => {
   // Initialize sound instance
@@ -90,60 +91,94 @@ const DjBooth = () => {
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <div className="h-screen flex flex-row relative justify-between mx-8 mt-16 pt-12">
-        <div
-          className=" flex flex-col  w-[30vw] h-[80vh] my-12 bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
-          id="playerA"
-        >
-          <div className="flex flex-col justify-self-center">
-            <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70">
-              Player A
-            </span>
-          </div>
-
-          <div className="flex flex-row" id="midSection">
-            <div
-              className="flex flex-row items-center mb-10 relative w-full"
-              id="pitchSection"
-            >
-              <PitchFader
-                sound={soundA}
-                setCalculatedBpm={setCalculatedBpmA}
-                originalBpm={originalBpmA}
-              />
-              <PitchBend sound={soundA} />
-
-              <SpinnerImage spin={isPlayingA} />
-            </div>
-          </div>
-          <BpmAnalyzer url={urlSoundA} setBpm={setOriginalBpmA} />
-          <div className="flex flex-row justify-center mb-2">
-            {calculatedBpmA ? (
-              <Badge>BPM: {calculatedBpmA.toFixed(2)}</Badge>
-            ) : originalBpmA ? (
-              <Badge>BPM: {originalBpmA}</Badge>
-            ) : (
-              <Badge>BPM: 0</Badge>
-            )}
-          </div>
-
-          <FileUpload onLoadTrack={handleLoadTrackA} />
-          <Ticker track={newTrackForTickerA} />
-          <TrackProgressBar sound={soundA} />
-          <div className="flex justify-center">
-            <PlayPauseBtn
-              isPlaying={isPlayingA}
-              setIsPlaying={setIsPlayingA}
-              sound={soundA}
-            />
-          </div>
-        </div>
-        <div className=" flex flex-col ">
+      <div className="">
+        <div className="items-center flex justify-center mt-4 mb-2 fixed inset-x-0 z-10">
           <Logo />
-          <div className="flex flex-col mt-2 border-black rounded-2xl border-4 bg-theme-blue drop-shadow-neo py-2 h-[30vh]">
-            <Waveform url={urlSoundA} howlInstance={soundA} />
-            <Waveform url={urlSoundB} howlInstance={soundB} />
-          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-8 grid-rows-5 h-screen grid-flow-col pt-[94px] px-8 pb-8">
+          <motion.div
+            initial={{
+              left: -500,
+              scale: 0.8,
+            }}
+            animate={{
+              left: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.75,
+            }}
+            className="relative flex flex-col bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black col-start-1 col-span-1 row-span-5"
+            id="playerA"
+          >
+            <div className="flex flex-col justify-self-center">
+              <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70">
+                Player A
+              </span>
+            </div>
+            <div className="flex flex-row" id="midSection">
+              <div
+                className="flex flex-row items-center mb-10 relative w-full"
+                id="pitchSection"
+              >
+                <PitchFader
+                  sound={soundA}
+                  setCalculatedBpm={setCalculatedBpmA}
+                  originalBpm={originalBpmA}
+                />
+                <PitchBend sound={soundA} />
+                <SpinnerImage spin={isPlayingA} />
+              </div>
+            </div>
+            <BpmAnalyzer url={urlSoundA} setBpm={setOriginalBpmA} />
+            <div className="flex flex-row justify-center mb-2">
+              {calculatedBpmA ? (
+                <Badge>BPM: {calculatedBpmA.toFixed(2)}</Badge>
+              ) : originalBpmA ? (
+                <Badge>BPM: {originalBpmA}</Badge>
+              ) : (
+                <Badge>BPM: 0</Badge>
+              )}
+            </div>
+            <FileUpload onLoadTrack={handleLoadTrackA} />
+            <Ticker track={newTrackForTickerA} />
+            <TrackProgressBar sound={soundA} />
+            <div className="flex justify-center">
+              <PlayPauseBtn
+                isPlaying={isPlayingA}
+                setIsPlaying={setIsPlayingA}
+                sound={soundA}
+              />
+            </div>
+          </motion.div>
+          {/* <div className=" flex flex-col "> */}
+          {/* <Logo /> */}
+          {urlSoundA || urlSoundB ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.5,
+                ease: [0, 0.71, 0.2, 1.01],
+              }}
+              id="waveformContainer"
+              className="flex flex-col border-black rounded-2xl border-4 bg-theme-blue drop-shadow-neo py-2 row-span-2"
+            >
+              <Waveform
+                id="waveform-player-a"
+                url={urlSoundA}
+                howlInstance={soundA}
+              />
+              <Waveform
+                id="waveform-player-b"
+                url={urlSoundB}
+                howlInstance={soundB}
+              />
+            </motion.div>
+          ) : (
+            <div className="row-span-2" />
+          )}
           <Mixer
             soundA={soundA}
             soundB={soundB}
@@ -152,43 +187,55 @@ const DjBooth = () => {
             setVolumeA={setVolumeA}
             setVolumeB={setVolumeB}
           />
-        </div>
-        <div
-          className="Player_B flex flex-col my-12 w-[30vw] h-[80vh] bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
-          id="playerB"
-        >
-          <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70">
-            Player B
-          </span>
-          <div className="flex flex-row items-center mb-10 relative">
-            <PitchFader
-              sound={soundB}
-              setCalculatedBpm={setCalculatedBpmB}
-              originalBpm={originalBpmB}
-            />
-            <PitchBend sound={soundB} />
-            <SpinnerImage spin={isPlayingB} />
-          </div>
-          <BpmAnalyzer url={urlSoundB} setBpm={setOriginalBpmB} />
-          <div className="flex flex-row justify-center mb-2">
-            {calculatedBpmB ? (
-              <Badge>BPM: {calculatedBpmB.toFixed(2)}</Badge>
-            ) : originalBpmB ? (
-              <Badge>BPM: {originalBpmB}</Badge>
-            ) : (
-              <Badge>BPM: 0</Badge>
-            )}
-          </div>
-          <FileUpload onLoadTrack={handleLoadTrackB} />
-          <Ticker track={newTrackForTickerB}></Ticker>
-          <TrackProgressBar sound={soundB} />
-          <div className="flex justify-center">
-            <PlayPauseBtn
-              isPlaying={isPlayingB}
-              setIsPlaying={setIsPlayingB}
-              sound={soundB}
-            />
-          </div>
+          {/* </div> */}
+          <motion.div
+            initial={{
+              left: 500,
+              scale: 0.8,
+            }}
+            animate={{
+              left: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.75,
+            }}
+            className="Player_B relative flex flex-col col-span-1 row-span-5  bg-theme-blue rounded-3xl p-10 drop-shadow-neo border-4 border-black"
+            id="playerB"
+          >
+            <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70">
+              Player B
+            </span>
+            <div className="flex flex-row items-center mb-10 relative">
+              <PitchFader
+                sound={soundB}
+                setCalculatedBpm={setCalculatedBpmB}
+                originalBpm={originalBpmB}
+              />
+              <PitchBend sound={soundB} />
+              <SpinnerImage spin={isPlayingB} />
+            </div>
+            <BpmAnalyzer url={urlSoundB} setBpm={setOriginalBpmB} />
+            <div className="flex flex-row justify-center mb-2">
+              {calculatedBpmB ? (
+                <Badge>BPM: {calculatedBpmB.toFixed(2)}</Badge>
+              ) : originalBpmB ? (
+                <Badge>BPM: {originalBpmB}</Badge>
+              ) : (
+                <Badge>BPM: 0</Badge>
+              )}
+            </div>
+            <FileUpload onLoadTrack={handleLoadTrackB} />
+            <Ticker track={newTrackForTickerB}></Ticker>
+            <TrackProgressBar sound={soundB} />
+            <div className="flex justify-center">
+              <PlayPauseBtn
+                isPlaying={isPlayingB}
+                setIsPlaying={setIsPlayingB}
+                sound={soundB}
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </>

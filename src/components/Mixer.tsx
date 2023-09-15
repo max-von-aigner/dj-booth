@@ -1,43 +1,7 @@
-// import LineFader from "./LineFader";
-
-// interface MixerProps {
-//   soundA: Howl | null;
-//   volumeA: number;
-//   setVolumeA: React.Dispatch<React.SetStateAction<number>>;
-//   soundB: Howl | null;
-//   volumeB: number;
-//   setVolumeB: React.Dispatch<React.SetStateAction<number>>;
-// }
-
-// const Mixer: React.FC<MixerProps> = ({
-//   soundA,
-//   volumeA,
-//   setVolumeA,
-//   soundB,
-//   volumeB,
-//   setVolumeB,
-// }) => {
-//   return (
-//     <div
-//       className=" flex flex-col mb-[2rem] bg-indigo-400 w-[30vw] h-[50vh]  rounded-3xl p-10 drop-shadow-neo border-4 border-black"
-//       id="mixer"
-//     >
-//       <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70 ">
-//         Mixer
-//       </span>
-//       <div className="flex justify-between px-10">
-//         <LineFader sound={soundA} volume={volumeA} setVolume={setVolumeA} />
-//         <LineFader sound={soundB} volume={volumeB} setVolume={setVolumeB} />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Mixer;
-
 import React, { useState } from "react";
 import LineFader from "./LineFader";
 import EQToggle from "./ThreebandEQ";
+import { motion } from "framer-motion";
 
 interface MixerProps {
   soundA: Howl | null;
@@ -67,8 +31,19 @@ const Mixer: React.FC<MixerProps> = ({
   // const [highGainB, setHighGainB] = useState(0);
 
   return (
-    <div
-      className=" flex flex-col mt-[4rem] bg-theme-blue w-[30vw] h-[45vh]  rounded-3xl p-10 drop-shadow-neo border-4 border-black"
+    <motion.div
+      initial={{
+        top: 500,
+        scale: 0.8,
+      }}
+      animate={{
+        top: 0,
+        scale: 1,
+      }}
+      transition={{
+        duration: 0.75,
+      }}
+      className="relative flex flex-col bg-theme-blue row-span-3 rounded-3xl p-10 drop-shadow-neo border-4 border-black"
       id="mixer"
     >
       <span className="font-sans font-bold text-center -mt-4 mb-10 text-2xl tracking-wider text-slate-200 opacity-70 ">
@@ -85,7 +60,7 @@ const Mixer: React.FC<MixerProps> = ({
           {/* <EQToggle sound={soundB} /> */}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
