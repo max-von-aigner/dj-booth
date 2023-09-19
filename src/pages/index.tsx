@@ -133,11 +133,13 @@ const DjBooth = () => {
             <BpmAnalyzer url={urlSoundA} setBpm={setOriginalBpmA} />
             <div className="flex flex-row justify-center mb-2">
               {calculatedBpmA ? (
-                <Badge>BPM: {calculatedBpmA.toFixed(2)}</Badge>
+                <Badge className="text-xl">
+                  BPM: {calculatedBpmA.toFixed(2)}
+                </Badge>
               ) : originalBpmA ? (
-                <Badge>BPM: {originalBpmA}</Badge>
+                <Badge className="text-xl ">BPM: {originalBpmA}</Badge>
               ) : (
-                <Badge>BPM: 0</Badge>
+                <Badge className="text-xl">BPM: 0</Badge>
               )}
             </div>
             <FileUpload onLoadTrack={handleLoadTrackA} />
@@ -218,11 +220,13 @@ const DjBooth = () => {
             <BpmAnalyzer url={urlSoundB} setBpm={setOriginalBpmB} />
             <div className="flex flex-row justify-center mb-2">
               {calculatedBpmB ? (
-                <Badge>BPM: {calculatedBpmB.toFixed(2)}</Badge>
+                <Badge className="text-xl ">
+                  BPM: {calculatedBpmB.toFixed(2)}
+                </Badge>
               ) : originalBpmB ? (
-                <Badge>BPM: {originalBpmB}</Badge>
+                <Badge className="text-xl ">BPM: {originalBpmB}</Badge>
               ) : (
-                <Badge>BPM: 0</Badge>
+                <Badge className="text-xl ">BPM: 0</Badge>
               )}
             </div>
             <FileUpload onLoadTrack={handleLoadTrackB} />

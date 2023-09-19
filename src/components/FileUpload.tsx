@@ -31,7 +31,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onLoadTrack }) => {
   };
 
   return (
-    <div className="mb-4">
+    <div className="">
       <Input
         type="file"
         onChange={handleFileUpload}
