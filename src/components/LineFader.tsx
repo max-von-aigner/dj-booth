@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
 
 // Initialize volume state
@@ -22,6 +22,14 @@ const LineFader: React.FC<LineFaderProps> = ({ sound, volume, setVolume }) => {
     console.log({ newVolume });
     setVolume(newVolume);
   };
+
+  // Set the volume for the sound object based on the fader value
+  // whenever the sound object is updated.
+  useEffect(() => {
+    if (sound) {
+      sound.volume(volume);
+    }
+  }, [sound, volume]);
 
   console.log(volume);
   console.log(volume * 100);

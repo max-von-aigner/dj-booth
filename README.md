@@ -1,39 +1,40 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-
 <a name="readme-top"></a>
 
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-<!-- PROJECT LOGO -->
 <br />
 
 <h1 align="center">Booth</h1>
 
   <p align="center">
-    Booth is a DJ platform, which allows users to upload tracks into the frontend and mix them together DJ-style. 
-    The app handles 
-    <li>BPM Analysis (Beats per Minute) with the Realtime BPM Analyzer, open source tool. </li> 
-    <li> </li>
-    <li> </li>
-    <li> </li>
-    <li> </li>
+    Booth is a DJ platform, which allows users to upload tracks and mix them together like a DJ. 
+    <br/>
+    <br/>
+This was the final project of my coding bootcamp and my first time building a project alone, from idea to execution. I'm a DJ, so this project was a way to combine two passions of mine: Coding and DJing
+    <br/>
+    <h3>Why I built Booth:</h3>
+    DJ equipment is very expensive and makes DJing pretty inaccessible. <br/> 
+    I'm setting out to change that with Booth. <br/>
+    I think people who want to get started with DJing, should not have to spend thousands of dollars for equipment, not even knowing yet, if they're gonna like it at all. 
+    <br/>
+<br/>
+ <h3>How I Designed Booth:</h3> The two ideas that influenced my design are 
+ <li><strong>Be intuitive!</strong>
+ <br/> I want to make DJing more accessible, so users with zero knowledge about DJing have to be able to understand what they need to do in the app.</li>
+  <li><strong>Be playful!</strong>
+  <br/> Invite users to play and experiemnt, because that is what DJing is about.</li>
+<br/>
+<br/>
+<img src="public/ui.png" width="900">
+
+   <h3>Features:</h3>
+   <li><strong>Track Upload</strong></li>
+    <li> <strong>BPM Analysis</strong> (Beats per Minute) with the Realtime BPM Analyzer, open source tool. </li> 
+    <li><strong>Waveform</strong></li>
+    <li><strong>Pitch Fader</strong></li>
+    <li><strong>Line Fader</strong></li>
+    <li><strong>Pitch Bend</strong></li>
+    <li><strong>Play/Pause Button</strong></li>
+    <li><strong>Track Progress</strong></li>
+    <li><strong>Ticker</strong></li>
     <br />
     <img src=""/>
     <a href="https://github.com/max-von-aigner/dj-booth"><strong>Explore the docs »</strong></a>
@@ -47,39 +48,7 @@
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
 <!-- ABOUT THE PROJECT -->
-
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -87,12 +56,6 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 - [![Next][Next.js]][Next-url]
 - [![React][React.js]][React-url]
-- [![Vue][Vue.js]][Vue-url]
-- [![Angular][Angular.io]][Angular-url]
-- [![Svelte][Svelte.dev]][Svelte-url]
-- [![Laravel][Laravel.com]][Laravel-url]
-- [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-- [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -144,10 +107,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [✅] <strong>Waveform</strong>
+- [✅] <strong>Pitch Fader</strong>
+- [✅] <strong>Line Fader</strong>
+- [✅] <strong>Pitch Bend</strong>
+- [✅] <strong>Play/Pause Button</strong>
+- [✅] <strong>Track Progress</strong>
+- [✅] <strong>Ticker</strong>
+- [ ] Integration with Soundcloud API
+- [ ] Pre-Listening Function with Websocket
+- [ ] Multiplayer with Websocket
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -170,23 +139,13 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Max von Aigner - von.aigner@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)](https://www.linkedin.com/in/vonaigner/)
+<br/>
+[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/MaxVonAigner)
 
 <!-- ACKNOWLEDGMENTS -->
 
